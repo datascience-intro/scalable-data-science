@@ -52,9 +52,17 @@ services:
         target: /root/hadoop-2.9.2/etc/hadoop
         read_only: true
       - type: bind
+        source: ./zeppelinConf
+        target: /root/zeppelin-0.8.0-bin-all/conf
+        read_only: false
+      - type: bind
         source: ./data
         target: /root/data
         read_only: true
+      - type: bind
+        source: ./programs
+        target: /root/programs
+        read_only: false
   jupyter:
     image: lamastex/hsjupyter
     command: --password lamastex
@@ -70,6 +78,10 @@ services:
         source: ./data
         target: /root/data
         read_only: true
+      - type: bind
+        source: ./programs
+        target: /root/programs
+        read_only: false
   nifi:
     image: apache/nifi
     ports:

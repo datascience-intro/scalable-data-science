@@ -28,6 +28,7 @@ def import_notebook(note):
         r = requests.post(requestURL, data = note.encode('utf-8')).json()
     except:
         r = requests.post(requestURL, data = note.encode('utf-8'))
+    print(r)
     if r["status"] == "OK":
         return r["body"]
     else:
@@ -37,6 +38,7 @@ if __name__ == "__main__":
     files = [join(args.notebook_dir, f) for f in os.listdir(args.notebook_dir)
              if isfile(join(args.notebook_dir, f))]
     for f in files:
+        print(f)
         json = open(f, "r").read()
         import_notebook(json)
 
